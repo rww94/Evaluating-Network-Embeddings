@@ -10,6 +10,7 @@ from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.metrics.pairwise import manhattan_distances
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics import roc_auc_score
+import time
 
 #Nodes数组，存储所有的节点ID
 Nodes=[]
@@ -89,11 +90,14 @@ def cosine_similarity( a,  b):
 
 #ROC指标
 def evaluate_ROC(X_test, Embeddings):
+    time_start=time.time()
     y_true = [ X_test[i][2] for i in range(len(X_test))]
     y_predict = [ cosine_similarity(Embeddings[X_test[i][0],:], Embeddings[X_test[i][1], :]) for i in range(len(X_test))]
     roc = roc_auc_score(y_true, y_predict)
     if roc < 0.5:
         roc = 1 - roc
+    time_end=time.time()
+    print(''evaluate_ROC run time:{}'.format(time_end-time_start))
     return roc
 
 #平均准确率
