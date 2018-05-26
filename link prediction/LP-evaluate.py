@@ -5,25 +5,14 @@ authot:raowei
 '''
 import numpy as np
 import math
+import time
 from sklearn.metrics import average_precision_score
 from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.metrics.pairwise import manhattan_distances
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics import roc_auc_score
-import time
+from sklearn.metrics import accuracy_score
 
-#Nodes数组，存储所有的节点ID
-Nodes=[]
-#Edges数组，存储所有边信息 第一个数源节点 第二个数目标节点
-Edges=[]
-#网络向量
-Embeddings=[]
-#X_test=[]测试数据集，第一个数源节点 第二个数目标节点 第三label
-X_test=[]
-#Node_map节点映射函数
-Node_map={}
-#节点邻居列表
-Node_neighbors_map={}
 #加载节点数据
 def load_node(nodefile_):
     nodes=[]
@@ -97,7 +86,7 @@ def evaluate_ROC(X_test, Embeddings):
     if roc < 0.5:
         roc = 1 - roc
     time_end=time.time()
-    print(''evaluate_ROC run time:{}'.format(time_end-time_start))
+    print('evaluate_ROC run time:{}'.format(time_end-time_start) )
     return roc
 
 #平均准确率
@@ -119,13 +108,24 @@ if __name__=='__main__':
     '''
     inputfile:节点编号文件、边集文件edgelist类型、向量文件（不包括节点ID）与节点编号文件对应、链路预测文件
     output：ROC值，节点小于10000可以使用evaluate_MAP（不用链路预测文件）
+    #Nodes数组，存储所有的节点ID
+    #Edges数组，存储所有边信息 第一个数源节点 第二个数目标节点
+    #网络向量Embeddings = []
+    #X_test=[]测试数据集，第一个数源节点 第二个数目标节点 第三label
+    #Node_map节点映射函数
+    #节点邻居列表 Node_neighbors_map = {}
     '''
-    Nodes = load_node('nodes.txt')
-    Edges = load_edge('doublelink.edgelist')
+    nodefile_='nodes.txt'
+    edgefile_='doublelink.edgelist'
+    testfile_='test_pairs.txt'
+    embeddingfile_='embs.txt'
+    Nodes = load_node(nodefile_)
+    Edges = load_edge(edgefile_)
     Node_map, Node_neighbors_map = make_map(Nodes, Edges)
-    X_test = load_test('test_pairs.txt',Node_map)
-    Embeddings = load_embeddings('embs.txt')
+    Embeddings = load_embeddings(embeddingfile_)
+    #if run ROC
+    X_test = load_test(testfile_,Node_map)
     ROC=evaluate_ROC(X_test,Embeddings)
     print(ROC)
-    #MAP=evaluate_MAP(Node_neighbors_map[:1000,:],Embeddings[:1000,:],'cosine_similarity')
+    #MAP=evaluate_MAP(Node_neighbors_map,Embeddings,'cosine_similarity')
     #print(MAP)
