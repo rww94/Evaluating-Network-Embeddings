@@ -1,5 +1,5 @@
 # Evaluating-Network-Embeddings
-链路预测（link prediction）
+# 链路预测（link prediction）
 预测网络的两个节点是否有边的存在。
 输入数据：网络节点的向量文件，要预测的数据文件（边和标签）、节点顺序文件
 输入数据：链路预测的准确率，ROC值等。
