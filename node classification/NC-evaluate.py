@@ -13,6 +13,7 @@ from sklearn.naive_bayes import MultinomialNB
 import numpy as np
 import time
 
+#分割数据，训练数据和测试数据
 def split_data(labelfile_,nodefile_,embeddingfile_):
     train_size = 0.8
     random_state = 4
@@ -35,6 +36,7 @@ def split_data(labelfile_,nodefile_,embeddingfile_):
     test_vec=[embeddings[node_map[i]] for i in test[:,0]]
     return train_vec,test_vec,train_y,test_y
 
+#节点映射
 def make_map(nodes):
     node_neighbors_map={}
     i=0
@@ -44,6 +46,7 @@ def make_map(nodes):
         i=i+1
     return node_map
 
+#分类方法
 def evaluation(labelfile_, nodefile_, embeddingfile_,classifierStr='SVM'):
     time_start=time.time()
     train_vec, test_vec, train_y, test_y=split_data(labelfile_, nodefile_, embeddingfile_)
