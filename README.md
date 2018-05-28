@@ -1,5 +1,5 @@
 # Evaluating-Network-Embeddings
-Evaluating the performance of a Network embedding method
+Evaluating the performance of a Network embedding method.
 <br/>eval-methods：Link Prediction & Nodes Classification
 
 ### Link Prediciton
