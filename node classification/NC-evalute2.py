@@ -1,6 +1,6 @@
 """
 NE-evaluation2-node-class
-Date:2018-05-26
+Date:2018-05-28
 authot:raowei
 神经网络分类方法
 """
