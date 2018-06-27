@@ -1,3 +1,10 @@
+"""
+NE-evaluation3-node-class
+Date:2018-05-27
+authot:raowei
+使用Tensorflow分类方法
+"""
+
 import tensorflow as tf
 from numpy.random import RandomState
 import random
@@ -32,7 +39,7 @@ class Network(object):
             self.sess = tf.Session()
             self.sess.run(init)
 
-
+    #定义权重和偏置矩阵
     def default_initialier(self):
         self.weights = [tf.Variable(tf.random_normal([x,y]))
                       for x, y in zip(self.sizes[:-1], self.sizes[1:])]
