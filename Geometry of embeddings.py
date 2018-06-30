@@ -1,3 +1,4 @@
+#title = {Towards Understanding the Geometry of Knowledge Graph Embeddings}
 import numpy as np
 
 def cosine_similarity(vec1,vec2):
