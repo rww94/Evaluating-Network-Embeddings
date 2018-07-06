@@ -9,7 +9,7 @@ def cosine_similarity(vec1,vec2):
         dot_product += a*b
         normA += a**2
         normB += b**2
-    if normA ==0.0 or normB ==0.0:
+    if normA == 0.0 or normB == 0.0:
         return 0
     else:
         return dot_product / ((normA**0.5) * (normB**0.5))
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     wf = open('analysis_result.txt','a')
     l = len(embs[0])
     con,atms = Conicity(embs)
-    avl =AVL(embs)
+    avl = AVL(embs)
     print 'embeddings dimensions:{}'.format(l)
     print 'Conicity:{}'.format(con)
     print 'AVL:{}'.format(avl)
